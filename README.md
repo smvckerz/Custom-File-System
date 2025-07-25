@@ -1,4 +1,3 @@
-
 # Custom File System (CSC415)
 
 > **Eduardo Muñoz – Summer 2025, SFSU**
@@ -6,6 +5,16 @@
 > A pedagogical file system written in C for the *Operating Systems* course (CSC 415). The project demonstrates low‑level disk layout planning, free‑space management with a bitmap, and POSIX‑style directory operations.
 
 ---
+
+## 📌 Author Contributions
+| Module                | Contribution |
+|-----------------------|--------------|
+| `src/bitmap.c`        | Wrote full bitmap allocate/free logic |
+| `src/dir.c`           | Implemented path parsing, `fs_mkdir`, `fs_readdir`, root `.`/`..` init |
+| `include/bitmap.h`    | API & bit helpers |
+| `tests/`              | Unit tests for bitmap + directory |
+| `tools/hexdump.sh`    | Debug script |
+| `Makefile`            | Stand-alone build script |
 
 ## ✨ Features
 | Area | Details |

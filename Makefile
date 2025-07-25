@@ -37,25 +37,24 @@ FIRSTNAME=Eduardo
 LASTNAME=Munoz
 
 ROOTNAME=$(LASTNAME)_$(FIRSTNAME)_HW
-HW=5
+HW=4
 FOPTION=_main
-# DO NOT CHANGE the RUNOPTIONS
-RUNOPTIONS=DATA DecOfInd.txt CommonSense.txt
+
+# RUNOPTIONS
+RUNOPTIONS=Law500K.dat header.txt 1 police_district BAYVIEW MISSION
 
 CC=gcc
 CFLAGS= -g -I.
 # To add libraries, add "-l <libname>", for multiple repeat prior for each lib.
-LIBS =
+LIBS =-l pthread -lm
 DEPS = 
 ARCH = $(shell uname -m)
 
-ifeq ($(ARCH), aarch64)
-	ARCHOBJ=buffer-mainM1.o
-else
-	ARCHOBJ=buffer-main.o
-endif
+# Add additional files here to the ADDOBJ, add the .o extension of the file only
+#     i.e. something along the line of Bierman_Robert_HW4_datastruct.o
+ADDOBJ =
 
-OBJ = b_io.o $(ARCHOBJ)
+OBJ = $(ROOTNAME)$(HW)$(FOPTION).o $(ADDOBJ)
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
@@ -64,10 +63,12 @@ $(ROOTNAME)$(HW)$(FOPTION): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)  $(LIBS)
 
 clean:
-	rm b_io.o $(ROOTNAME)$(HW)$(FOPTION)
+	rm $(ROOTNAME)$(HW)$(FOPTION).o $(ROOTNAME)$(HW)$(FOPTION) $(ADDOBJ)
 
 run: $(ROOTNAME)$(HW)$(FOPTION)
 	./$(ROOTNAME)$(HW)$(FOPTION) $(RUNOPTIONS)
 
 vrun: $(ROOTNAME)$(HW)$(FOPTION)
 	valgrind ./$(ROOTNAME)$(HW)$(FOPTION) $(RUNOPTIONS)
+
+
